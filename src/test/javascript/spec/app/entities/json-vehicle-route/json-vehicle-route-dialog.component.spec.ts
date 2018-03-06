@@ -9,6 +9,7 @@ import { VehicleroutingTestModule } from '../../../test.module';
 import { JsonVehicleRouteDialogComponent } from '../../../../../../main/webapp/app/entities/json-vehicle-route/json-vehicle-route-dialog.component';
 import { JsonVehicleRouteService } from '../../../../../../main/webapp/app/entities/json-vehicle-route/json-vehicle-route.service';
 import { JsonVehicleRoute } from '../../../../../../main/webapp/app/entities/json-vehicle-route/json-vehicle-route.model';
+import { JsonVehicleRoutingSolutionService } from '../../../../../../main/webapp/app/entities/json-vehicle-routing-solution';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [VehicleroutingTestModule],
                 declarations: [JsonVehicleRouteDialogComponent],
                 providers: [
+                    JsonVehicleRoutingSolutionService,
                     JsonVehicleRouteService
                 ]
             })

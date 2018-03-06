@@ -2,10 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "customerList",
+            "relationshipName": "customer",
             "otherEntityName": "jsonCustomer",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "vehicleRoute"
+        },
+        {
+            "relationshipName": "vehicleRoutingSolution",
+            "otherEntityName": "jsonVehicleRoutingSolution",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

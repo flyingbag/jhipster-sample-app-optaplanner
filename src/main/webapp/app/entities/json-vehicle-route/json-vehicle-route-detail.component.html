@@ -28,6 +28,12 @@
         <dd>
             <span>{{jsonVehicleRoute.demandTotal}}</span>
         </dd>
+        <dt><span>Vehicle Routing Solution</span></dt>
+        <dd>
+            <div *ngIf="jsonVehicleRoute.vehicleRoutingSolution">
+                <a [routerLink]="['/json-vehicle-routing-solution', jsonVehicleRoute.vehicleRoutingSolution?.id]">{{jsonVehicleRoute.vehicleRoutingSolution?.id}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

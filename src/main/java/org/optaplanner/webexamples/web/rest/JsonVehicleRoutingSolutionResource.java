@@ -140,8 +140,8 @@ public class JsonVehicleRoutingSolutionResource {
     public ResponseEntity<JsonMessage> solve() throws URISyntaxException {
         log.debug("REST request to solve a Solution.");
         JsonMessage result = jsonVehicleRoutingSolutionService.solve();
-        return ResponseEntity.created(new URI("/api/solution/solve/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+        return ResponseEntity.created(new URI("/api/solution/solve"))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getText()))
             .body(result);
     }
 
@@ -156,8 +156,8 @@ public class JsonVehicleRoutingSolutionResource {
     public ResponseEntity<JsonMessage> terminateEarly() throws URISyntaxException {
         log.debug("REST request to solve a Solution early.");
         JsonMessage result = jsonVehicleRoutingSolutionService.terminateEarly();
-        return ResponseEntity.created(new URI("/api/solution/solve/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+        return ResponseEntity.created(new URI("/api/solution/terminateEarly"))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getText()))
             .body(result);
     }
 }

@@ -33,11 +33,11 @@ public class JsonVehicleRoutingSolution implements Serializable {
 
     @OneToMany(mappedBy = "vehicleRoutingSolution")
     @JsonIgnore
-    private Set<JsonCustomer> customerLists = new HashSet<>();
+    private Set<JsonCustomer> customers = new HashSet<>();
 
     @OneToMany(mappedBy = "vehicleRoutingSolution")
     @JsonIgnore
-    private Set<JsonVehicleRoute> vehicleRouteLists = new HashSet<>();
+    private Set<JsonVehicleRoute> vehicleRoutes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -87,50 +87,54 @@ public class JsonVehicleRoutingSolution implements Serializable {
         this.distance = distance;
     }
 
-    public Set<JsonCustomer> getCustomerLists() {
-        return customerLists;
+    public Set<JsonCustomer> getCustomers() {
+        return customers;
     }
 
-    public JsonVehicleRoutingSolution customerLists(Set<JsonCustomer> jsonCustomers) {
-        this.customerLists = jsonCustomers;
+    public JsonVehicleRoutingSolution customers(Set<JsonCustomer> jsonCustomers) {
+        this.customers = jsonCustomers;
         return this;
     }
 
-    public JsonVehicleRoutingSolution addCustomerList(JsonCustomer jsonCustomer) {
-        this.customerLists.add(jsonCustomer);
+    public JsonVehicleRoutingSolution addCustomer(JsonCustomer jsonCustomer) {
+        this.customers.add(jsonCustomer);
+        jsonCustomer.setVehicleRoutingSolution(this);
         return this;
     }
 
-    public JsonVehicleRoutingSolution removeCustomerList(JsonCustomer jsonCustomer) {
-        this.customerLists.remove(jsonCustomer);
+    public JsonVehicleRoutingSolution removeCustomer(JsonCustomer jsonCustomer) {
+        this.customers.remove(jsonCustomer);
+        jsonCustomer.setVehicleRoutingSolution(null);
         return this;
     }
 
-    public void setCustomerLists(Set<JsonCustomer> jsonCustomers) {
-        this.customerLists = jsonCustomers;
+    public void setCustomers(Set<JsonCustomer> jsonCustomers) {
+        this.customers = jsonCustomers;
     }
 
-    public Set<JsonVehicleRoute> getVehicleRouteLists() {
-        return vehicleRouteLists;
+    public Set<JsonVehicleRoute> getVehicleRoutes() {
+        return vehicleRoutes;
     }
 
-    public JsonVehicleRoutingSolution vehicleRouteLists(Set<JsonVehicleRoute> jsonVehicleRoutes) {
-        this.vehicleRouteLists = jsonVehicleRoutes;
+    public JsonVehicleRoutingSolution vehicleRoutes(Set<JsonVehicleRoute> jsonVehicleRoutes) {
+        this.vehicleRoutes = jsonVehicleRoutes;
         return this;
     }
 
-    public JsonVehicleRoutingSolution addVehicleRouteList(JsonVehicleRoute jsonVehicleRoute) {
-        this.vehicleRouteLists.add(jsonVehicleRoute);
+    public JsonVehicleRoutingSolution addVehicleRoute(JsonVehicleRoute jsonVehicleRoute) {
+        this.vehicleRoutes.add(jsonVehicleRoute);
+        jsonVehicleRoute.setVehicleRoutingSolution(this);
         return this;
     }
 
-    public JsonVehicleRoutingSolution removeVehicleRouteList(JsonVehicleRoute jsonVehicleRoute) {
-        this.vehicleRouteLists.remove(jsonVehicleRoute);
+    public JsonVehicleRoutingSolution removeVehicleRoute(JsonVehicleRoute jsonVehicleRoute) {
+        this.vehicleRoutes.remove(jsonVehicleRoute);
+        jsonVehicleRoute.setVehicleRoutingSolution(null);
         return this;
     }
 
-    public void setVehicleRouteLists(Set<JsonVehicleRoute> jsonVehicleRoutes) {
-        this.vehicleRouteLists = jsonVehicleRoutes;
+    public void setVehicleRoutes(Set<JsonVehicleRoute> jsonVehicleRoutes) {
+        this.vehicleRoutes = jsonVehicleRoutes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

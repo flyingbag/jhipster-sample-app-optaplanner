@@ -31,6 +31,12 @@ public class JsonCustomer implements Serializable {
     @Column(name = "demand")
     private Integer demand;
 
+    @ManyToOne
+    private JsonVehicleRoutingSolution vehicleRoutingSolution;
+
+    @ManyToOne
+    private JsonVehicleRoute vehicleRoute;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -90,6 +96,32 @@ public class JsonCustomer implements Serializable {
 
     public void setDemand(Integer demand) {
         this.demand = demand;
+    }
+
+    public JsonVehicleRoutingSolution getVehicleRoutingSolution() {
+        return vehicleRoutingSolution;
+    }
+
+    public JsonCustomer vehicleRoutingSolution(JsonVehicleRoutingSolution jsonVehicleRoutingSolution) {
+        this.vehicleRoutingSolution = jsonVehicleRoutingSolution;
+        return this;
+    }
+
+    public void setVehicleRoutingSolution(JsonVehicleRoutingSolution jsonVehicleRoutingSolution) {
+        this.vehicleRoutingSolution = jsonVehicleRoutingSolution;
+    }
+
+    public JsonVehicleRoute getVehicleRoute() {
+        return vehicleRoute;
+    }
+
+    public JsonCustomer vehicleRoute(JsonVehicleRoute jsonVehicleRoute) {
+        this.vehicleRoute = jsonVehicleRoute;
+        return this;
+    }
+
+    public void setVehicleRoute(JsonVehicleRoute jsonVehicleRoute) {
+        this.vehicleRoute = jsonVehicleRoute;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

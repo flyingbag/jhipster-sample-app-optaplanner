@@ -6,8 +6,8 @@ export class JsonVehicleRoutingSolution implements BaseEntity {
         public name?: string,
         public feasible?: boolean,
         public distance?: string,
-        public customerLists?: BaseEntity[],
-        public vehicleRouteLists?: BaseEntity[],
+        public customers?: BaseEntity[],
+        public vehicleRoutes?: BaseEntity[],
     ) {
         this.feasible = false;
     }

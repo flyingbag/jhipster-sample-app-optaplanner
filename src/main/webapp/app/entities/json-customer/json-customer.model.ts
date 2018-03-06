@@ -7,6 +7,8 @@ export class JsonCustomer implements BaseEntity {
         public latitude?: number,
         public longitude?: number,
         public demand?: number,
+        public vehicleRoutingSolution?: BaseEntity,
+        public vehicleRoute?: BaseEntity,
     ) {
     }
 }

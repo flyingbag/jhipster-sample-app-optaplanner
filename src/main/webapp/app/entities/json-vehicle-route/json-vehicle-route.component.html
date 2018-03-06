@@ -23,6 +23,7 @@
             <th><span>Hex Color</span></th>
             <th><span>Capacity</span></th>
             <th><span>Demand Total</span></th>
+            <th><span>Vehicle Routing Solution</span></th>
             <th></th>
             </tr>
             </thead>
@@ -35,6 +36,11 @@
                 <td>{{jsonVehicleRoute.hexColor}}</td>
                 <td>{{jsonVehicleRoute.capacity}}</td>
                 <td>{{jsonVehicleRoute.demandTotal}}</td>
+                <td>
+                    <div *ngIf="jsonVehicleRoute.vehicleRoutingSolution">
+                        <a [routerLink]="['../json-vehicle-routing-solution', jsonVehicleRoute.vehicleRoutingSolution?.id ]" >{{jsonVehicleRoute.vehicleRoutingSolution?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

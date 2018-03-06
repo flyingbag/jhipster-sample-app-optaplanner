@@ -21,6 +21,8 @@
             <th><span>Latitude</span></th>
             <th><span>Longitude</span></th>
             <th><span>Demand</span></th>
+            <th><span>Vehicle Routing Solution</span></th>
+            <th><span>Vehicle Route</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +33,16 @@
                 <td>{{jsonCustomer.latitude}}</td>
                 <td>{{jsonCustomer.longitude}}</td>
                 <td>{{jsonCustomer.demand}}</td>
+                <td>
+                    <div *ngIf="jsonCustomer.vehicleRoutingSolution">
+                        <a [routerLink]="['../json-vehicle-routing-solution', jsonCustomer.vehicleRoutingSolution?.id ]" >{{jsonCustomer.vehicleRoutingSolution?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="jsonCustomer.vehicleRoute">
+                        <a [routerLink]="['../json-vehicle-route', jsonCustomer.vehicleRoute?.id ]" >{{jsonCustomer.vehicleRoute?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

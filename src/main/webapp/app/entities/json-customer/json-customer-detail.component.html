@@ -20,6 +20,18 @@
         <dd>
             <span>{{jsonCustomer.demand}}</span>
         </dd>
+        <dt><span>Vehicle Routing Solution</span></dt>
+        <dd>
+            <div *ngIf="jsonCustomer.vehicleRoutingSolution">
+                <a [routerLink]="['/json-vehicle-routing-solution', jsonCustomer.vehicleRoutingSolution?.id]">{{jsonCustomer.vehicleRoutingSolution?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Vehicle Route</span></dt>
+        <dd>
+            <div *ngIf="jsonCustomer.vehicleRoute">
+                <a [routerLink]="['/json-vehicle-route', jsonCustomer.vehicleRoute?.id]">{{jsonCustomer.vehicleRoute?.id}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

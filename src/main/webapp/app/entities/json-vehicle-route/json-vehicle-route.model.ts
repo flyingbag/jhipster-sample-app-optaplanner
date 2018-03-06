@@ -9,7 +9,8 @@ export class JsonVehicleRoute implements BaseEntity {
         public hexColor?: string,
         public capacity?: number,
         public demandTotal?: number,
-        public customerLists?: BaseEntity[],
+        public customers?: BaseEntity[],
+        public vehicleRoutingSolution?: BaseEntity,
     ) {
     }
 }

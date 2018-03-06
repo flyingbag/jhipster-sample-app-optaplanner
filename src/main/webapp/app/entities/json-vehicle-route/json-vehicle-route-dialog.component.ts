@@ -4,11 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { JsonVehicleRoute } from './json-vehicle-route.model';
 import { JsonVehicleRoutePopupService } from './json-vehicle-route-popup.service';
 import { JsonVehicleRouteService } from './json-vehicle-route.service';
+import { JsonVehicleRoutingSolution, JsonVehicleRoutingSolutionService } from '../json-vehicle-routing-solution';
 
 @Component({
     selector: 'jhi-json-vehicle-route-dialog',
@@ -19,15 +20,21 @@ export class JsonVehicleRouteDialogComponent implements OnInit {
     jsonVehicleRoute: JsonVehicleRoute;
     isSaving: boolean;
 
+    jsonvehicleroutingsolutions: JsonVehicleRoutingSolution[];
+
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private jsonVehicleRouteService: JsonVehicleRouteService,
+        private jsonVehicleRoutingSolutionService: JsonVehicleRoutingSolutionService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.jsonVehicleRoutingSolutionService.query()
+            .subscribe((res: HttpResponse<JsonVehicleRoutingSolution[]>) => { this.jsonvehicleroutingsolutions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,6 +65,14 @@ export class JsonVehicleRouteDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackJsonVehicleRoutingSolutionById(index: number, item: JsonVehicleRoutingSolution) {
+        return item.id;
     }
 }
 

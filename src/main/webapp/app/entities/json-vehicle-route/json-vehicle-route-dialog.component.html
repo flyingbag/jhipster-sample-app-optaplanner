@@ -43,6 +43,13 @@
                 [(ngModel)]="jsonVehicleRoute.demandTotal" />
         </div>
 
+        <div class="form-group">
+            <label class="form-control-label" for="field_vehicleRoutingSolution">Vehicle Routing Solution</label>
+            <select class="form-control" id="field_vehicleRoutingSolution" name="vehicleRoutingSolution" [(ngModel)]="jsonVehicleRoute.vehicleRoutingSolution" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="jsonVehicleRoutingSolutionOption.id === jsonVehicleRoute.vehicleRoutingSolution?.id ? jsonVehicleRoute.vehicleRoutingSolution : jsonVehicleRoutingSolutionOption" *ngFor="let jsonVehicleRoutingSolutionOption of jsonvehicleroutingsolutions; trackBy: trackJsonVehicleRoutingSolutionById">{{jsonVehicleRoutingSolutionOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

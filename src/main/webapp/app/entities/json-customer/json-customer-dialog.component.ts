@@ -4,11 +4,13 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { JsonCustomer } from './json-customer.model';
 import { JsonCustomerPopupService } from './json-customer-popup.service';
 import { JsonCustomerService } from './json-customer.service';
+import { JsonVehicleRoutingSolution, JsonVehicleRoutingSolutionService } from '../json-vehicle-routing-solution';
+import { JsonVehicleRoute, JsonVehicleRouteService } from '../json-vehicle-route';
 
 @Component({
     selector: 'jhi-json-customer-dialog',
@@ -19,15 +21,26 @@ export class JsonCustomerDialogComponent implements OnInit {
     jsonCustomer: JsonCustomer;
     isSaving: boolean;
 
+    jsonvehicleroutingsolutions: JsonVehicleRoutingSolution[];
+
+    jsonvehicleroutes: JsonVehicleRoute[];
+
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private jsonCustomerService: JsonCustomerService,
+        private jsonVehicleRoutingSolutionService: JsonVehicleRoutingSolutionService,
+        private jsonVehicleRouteService: JsonVehicleRouteService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.jsonVehicleRoutingSolutionService.query()
+            .subscribe((res: HttpResponse<JsonVehicleRoutingSolution[]>) => { this.jsonvehicleroutingsolutions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.jsonVehicleRouteService.query()
+            .subscribe((res: HttpResponse<JsonVehicleRoute[]>) => { this.jsonvehicleroutes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,6 +71,18 @@ export class JsonCustomerDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackJsonVehicleRoutingSolutionById(index: number, item: JsonVehicleRoutingSolution) {
+        return item.id;
+    }
+
+    trackJsonVehicleRouteById(index: number, item: JsonVehicleRoute) {
+        return item.id;
     }
 }
 

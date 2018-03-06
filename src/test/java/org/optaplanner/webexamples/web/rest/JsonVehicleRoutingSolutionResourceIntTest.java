@@ -254,13 +254,13 @@ public class JsonVehicleRoutingSolutionResourceIntTest {
     @Test
     public void solve() throws Exception {
         restJsonVehicleRoutingSolutionMockMvc.perform(post("/api/solution/solve"))
-            .andExpect(status().isOk());
+            .andExpect(status().isCreated());
     }
 
     @Test
     public void terminateEarly() throws Exception {
         restJsonVehicleRoutingSolutionMockMvc.perform(post("/api/solution/terminateEarly"))
-            .andExpect(status().isOk());
+            .andExpect(status().isCreated());
     }
 
     @Test

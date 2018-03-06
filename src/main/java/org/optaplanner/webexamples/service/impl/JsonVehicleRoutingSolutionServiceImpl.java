@@ -43,6 +43,7 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
     public JsonVehicleRoutingSolutionServiceImpl(JsonVehicleRoutingSolutionRepository jsonVehicleRoutingSolutionRepository) {
         this.jsonVehicleRoutingSolutionRepository = jsonVehicleRoutingSolutionRepository;
         solverManager = new VehicleRoutingSolverManager();
+        solverManager.init();
     }
 
     /**
@@ -114,17 +115,17 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
     protected JsonVehicleRoutingSolution convertToJsonVehicleRoutingSolution(VehicleRoutingSolution solution) {
         JsonVehicleRoutingSolution jsonSolution = new JsonVehicleRoutingSolution();
         jsonSolution.setName(solution.getName());
-        Set<JsonCustomer> jsonCustomerList = new HashSet<>(solution.getCustomerList().size());
+        Set<JsonCustomer> jsonCustomers = new HashSet<>(solution.getCustomerList().size());
         for (Customer customer : solution.getCustomerList()) {
             Location customerLocation = customer.getLocation();
-            jsonCustomerList.add(new JsonCustomer()
+            jsonCustomers.add(new JsonCustomer()
                 .locationName(customerLocation.getName())
                 .latitude(customerLocation.getLatitude())
                 .longitude(customerLocation.getLongitude())
                 .demand(customer.getDemand()));
         }
-        jsonSolution.setCustomerLists(jsonCustomerList);
-        Set<JsonVehicleRoute> jsonVehicleRouteList = new HashSet<>(solution.getVehicleList().size());
+        jsonSolution.setCustomers(jsonCustomers);
+        Set<JsonVehicleRoute> jsonVehicleRoutes = new HashSet<>(solution.getVehicleList().size());
         TangoColorFactory tangoColorFactory = new TangoColorFactory();
         for (Vehicle vehicle : solution.getVehicleList()) {
             JsonVehicleRoute jsonVehicleRoute = new JsonVehicleRoute();
@@ -138,11 +139,11 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
                 String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue()));
             Customer customer = vehicle.getNextCustomer();
             int demandTotal = 0;
-            Set<JsonCustomer> jsonVehicleCustomerList = new HashSet<>();
+            Set<JsonCustomer> jsonVehicleCustomers = new HashSet<>();
             while (customer != null) {
                 Location customerLocation = customer.getLocation();
                 demandTotal += customer.getDemand();
-                jsonVehicleCustomerList.add(new JsonCustomer()
+                jsonVehicleCustomers.add(new JsonCustomer()
                     .locationName(customerLocation.getName())
                     .latitude(customerLocation.getLatitude())
                     .longitude(customerLocation.getLongitude())
@@ -150,10 +151,10 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
                 customer = customer.getNextCustomer();
             }
             jsonVehicleRoute.setDemandTotal(demandTotal);
-            jsonVehicleRoute.setCustomerLists(jsonVehicleCustomerList);
-            jsonVehicleRouteList.add(jsonVehicleRoute);
+            jsonVehicleRoute.setCustomers(jsonVehicleCustomers);
+            jsonVehicleRoutes.add(jsonVehicleRoute);
         }
-        jsonSolution.setVehicleRouteLists(jsonVehicleRouteList);
+        jsonSolution.setVehicleRoutes(jsonVehicleRoutes);
         HardSoftLongScore score = solution.getScore();
         jsonSolution.setFeasible(score != null && score.isFeasible());
         jsonSolution.setDistance(solution.getDistanceString(NUMBER_FORMAT));
