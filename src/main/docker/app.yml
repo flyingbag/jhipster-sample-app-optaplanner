@@ -1,0 +1,14 @@
+version: '2'
+services:
+    vehiclerouting-app:
+        image: vehiclerouting
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://vehiclerouting-mysql:3306/vehiclerouting?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    vehiclerouting-mysql:
+        extends:
+            file: mysql.yml
+            service: vehiclerouting-mysql
