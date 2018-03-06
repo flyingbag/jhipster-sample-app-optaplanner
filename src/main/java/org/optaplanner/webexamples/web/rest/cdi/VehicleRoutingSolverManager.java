@@ -24,7 +24,6 @@ import org.optaplanner.examples.vehiclerouting.persistence.VehicleRoutingImporte
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.Map;
@@ -32,7 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@ApplicationScoped
 public class VehicleRoutingSolverManager implements Serializable {
 
     private static final String SOLVER_CONFIG = "org/optaplanner/examples/vehiclerouting/solver/vehicleRoutingSolverConfig.xml";

@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -39,11 +38,11 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
 
     private static final NumberFormat NUMBER_FORMAT = new DecimalFormat("#,##0.00");
 
-    @Inject
     private VehicleRoutingSolverManager solverManager;
 
     public JsonVehicleRoutingSolutionServiceImpl(JsonVehicleRoutingSolutionRepository jsonVehicleRoutingSolutionRepository) {
         this.jsonVehicleRoutingSolutionRepository = jsonVehicleRoutingSolutionRepository;
+        solverManager = new VehicleRoutingSolverManager();
     }
 
     /**
