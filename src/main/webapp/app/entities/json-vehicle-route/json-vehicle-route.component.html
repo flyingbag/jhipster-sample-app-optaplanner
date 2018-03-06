@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span>Json Vehicle Routes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-json-vehicle-route" [routerLink]="['/', { outlets: { popup: ['json-vehicle-route-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Json Vehicle Route
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="jsonVehicleRoutes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Depot Location Name</span></th>
+            <th><span>Depot Latitude</span></th>
+            <th><span>Depot Longitude</span></th>
+            <th><span>Hex Color</span></th>
+            <th><span>Capacity</span></th>
+            <th><span>Demand Total</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let jsonVehicleRoute of jsonVehicleRoutes ;trackBy: trackId">
+                <td><a [routerLink]="['../json-vehicle-route', jsonVehicleRoute.id ]">{{jsonVehicleRoute.id}}</a></td>
+                <td>{{jsonVehicleRoute.depotLocationName}}</td>
+                <td>{{jsonVehicleRoute.depotLatitude}}</td>
+                <td>{{jsonVehicleRoute.depotLongitude}}</td>
+                <td>{{jsonVehicleRoute.hexColor}}</td>
+                <td>{{jsonVehicleRoute.capacity}}</td>
+                <td>{{jsonVehicleRoute.demandTotal}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../json-vehicle-route', jsonVehicleRoute.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'json-vehicle-route/'+ jsonVehicleRoute.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'json-vehicle-route/'+ jsonVehicleRoute.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

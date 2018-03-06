@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customerList",
+            "otherEntityName": "jsonCustomer",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "vehicleRoutingSolution"
+        },
+        {
+            "relationshipName": "vehicleRouteList",
+            "otherEntityName": "jsonVehicleRoute",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "vehicleRoutingSolution"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "feasible",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "distance",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180306123228",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "json_vehicle_routing_solution",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

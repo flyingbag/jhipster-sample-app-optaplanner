@@ -1,0 +1,55 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myJsonVehicleRouteLabel">Create or edit a Json Vehicle Route</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!jsonVehicleRoute.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="jsonVehicleRoute.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_depotLocationName">Depot Location Name</label>
+            <input type="text" class="form-control" name="depotLocationName" id="field_depotLocationName"
+                [(ngModel)]="jsonVehicleRoute.depotLocationName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_depotLatitude">Depot Latitude</label>
+            <input type="number" class="form-control" name="depotLatitude" id="field_depotLatitude"
+                [(ngModel)]="jsonVehicleRoute.depotLatitude" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_depotLongitude">Depot Longitude</label>
+            <input type="number" class="form-control" name="depotLongitude" id="field_depotLongitude"
+                [(ngModel)]="jsonVehicleRoute.depotLongitude" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hexColor">Hex Color</label>
+            <input type="text" class="form-control" name="hexColor" id="field_hexColor"
+                [(ngModel)]="jsonVehicleRoute.hexColor" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_capacity">Capacity</label>
+            <input type="number" class="form-control" name="capacity" id="field_capacity"
+                [(ngModel)]="jsonVehicleRoute.capacity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_demandTotal">Demand Total</label>
+            <input type="number" class="form-control" name="demandTotal" id="field_demandTotal"
+                [(ngModel)]="jsonVehicleRoute.demandTotal" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

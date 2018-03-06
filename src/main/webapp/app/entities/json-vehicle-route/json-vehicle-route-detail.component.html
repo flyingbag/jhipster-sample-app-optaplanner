@@ -1,0 +1,46 @@
+
+<div *ngIf="jsonVehicleRoute">
+    <h2><span>Json Vehicle Route</span> {{jsonVehicleRoute.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Depot Location Name</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.depotLocationName}}</span>
+        </dd>
+        <dt><span>Depot Latitude</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.depotLatitude}}</span>
+        </dd>
+        <dt><span>Depot Longitude</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.depotLongitude}}</span>
+        </dd>
+        <dt><span>Hex Color</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.hexColor}}</span>
+        </dd>
+        <dt><span>Capacity</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.capacity}}</span>
+        </dd>
+        <dt><span>Demand Total</span></dt>
+        <dd>
+            <span>{{jsonVehicleRoute.demandTotal}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'json-vehicle-route/'+ jsonVehicleRoute.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

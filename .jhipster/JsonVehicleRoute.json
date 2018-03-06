@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customerList",
+            "otherEntityName": "jsonCustomer",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "vehicleRoute"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "depotLocationName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "depotLatitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "depotLongitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "hexColor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "capacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "demandTotal",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180306122854",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "json_vehicle_route",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

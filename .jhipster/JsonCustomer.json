@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "locationName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "demand",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180306122352",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "json_customer",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
