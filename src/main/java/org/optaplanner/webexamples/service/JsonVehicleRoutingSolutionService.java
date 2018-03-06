@@ -1,5 +1,6 @@
 package org.optaplanner.webexamples.service;
 
+import org.optaplanner.webexamples.domain.JsonMessage;
 import org.optaplanner.webexamples.domain.JsonVehicleRoutingSolution;
 import java.util.List;
 
@@ -37,4 +38,10 @@ public interface JsonVehicleRoutingSolutionService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    JsonVehicleRoutingSolution getSolution();
+
+    JsonMessage solve();
+
+    JsonMessage terminateEarly();
 }

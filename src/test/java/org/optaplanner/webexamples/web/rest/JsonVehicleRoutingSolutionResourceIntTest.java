@@ -38,7 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = VehicleroutingApp.class)
 public class JsonVehicleRoutingSolutionResourceIntTest {
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -244,6 +243,24 @@ public class JsonVehicleRoutingSolutionResourceIntTest {
         // Validate the database is empty
         List<JsonVehicleRoutingSolution> jsonVehicleRoutingSolutionList = jsonVehicleRoutingSolutionRepository.findAll();
         assertThat(jsonVehicleRoutingSolutionList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    public void getSolution() throws Exception {
+        restJsonVehicleRoutingSolutionMockMvc.perform(get("/api/solution"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    public void solve() throws Exception {
+        restJsonVehicleRoutingSolutionMockMvc.perform(post("/api/solution/solve"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    public void terminateEarly() throws Exception {
+        restJsonVehicleRoutingSolutionMockMvc.perform(post("/api/solution/terminateEarly"))
+            .andExpect(status().isOk());
     }
 
     @Test
