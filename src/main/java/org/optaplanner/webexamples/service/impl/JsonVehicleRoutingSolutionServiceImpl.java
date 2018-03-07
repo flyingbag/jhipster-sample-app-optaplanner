@@ -15,6 +15,7 @@ import org.optaplanner.webexamples.service.JsonVehicleRoutingSolutionService;
 import org.optaplanner.webexamples.web.rest.cdi.VehicleRoutingSolverManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,12 +39,11 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
 
     private static final NumberFormat NUMBER_FORMAT = new DecimalFormat("#,##0.00");
 
+    @Autowired
     private VehicleRoutingSolverManager solverManager;
 
     public JsonVehicleRoutingSolutionServiceImpl(JsonVehicleRoutingSolutionRepository jsonVehicleRoutingSolutionRepository) {
         this.jsonVehicleRoutingSolutionRepository = jsonVehicleRoutingSolutionRepository;
-        solverManager = new VehicleRoutingSolverManager();
-        solverManager.init();
     }
 
     /**
