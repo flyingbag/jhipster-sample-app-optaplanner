@@ -47,42 +47,37 @@ class JsonVehicleRoutingSolutionGatlingTest extends Simulation {
         .get("/api/account")
         .headers(headers_http)
         .check(status.is(401))).exitHereIfFailed
-        .pause(10)
+        .pause(1)
         .exec(http("Authentication")
-        .post("/api/authenticate")
-        .headers(headers_http_authentication)
-        .body(StringBody("""{"username":"admin", "password":"admin"}""")).asJSON
-        .check(header.get("Authorization").saveAs("access_token"))).exitHereIfFailed
+            .post("/api/authenticate")
+            .headers(headers_http_authentication)
+            .body(StringBody("""{"username":"admin", "password":"admin"}""")).asJSON
+            .check(header.get("Authorization").saveAs("access_token"))
+        ).exitHereIfFailed
         .pause(1)
         .exec(http("Authenticated request")
-        .get("/api/account")
-        .headers(headers_http_authenticated)
-        .check(status.is(200)))
-        .pause(10)
-        .repeat(2) {
-            exec(http("Get all jsonVehicleRoutingSolutions")
-            .get("/api/json-vehicle-routing-solutions")
+            .get("/api/account")
             .headers(headers_http_authenticated)
-            .check(status.is(200)))
-            .pause(10 seconds, 20 seconds)
-            .exec(http("Create new jsonVehicleRoutingSolution")
-            .post("/api/json-vehicle-routing-solutions")
+            .check(status.is(200))
+        )
+        .pause(1)
+        .exec(http("Begin to solve a jsonVehicleRoutingSolution")
+            .post("/api/solution/solve")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "feasible":null, "distance":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_jsonVehicleRoutingSolution_url"))).exitHereIfFailed
-            .pause(10)
-            .repeat(5) {
-                exec(http("Get created jsonVehicleRoutingSolution")
-                .get("${new_jsonVehicleRoutingSolution_url}")
-                .headers(headers_http_authenticated))
-                .pause(10)
-            }
-            .exec(http("Delete created jsonVehicleRoutingSolution")
-            .delete("${new_jsonVehicleRoutingSolution_url}")
-            .headers(headers_http_authenticated))
-            .pause(10)
-        }
+        )
+        .pause(60)
+        .exec(http("Terminate solving a jsonVehicleRoutingSolution early")
+            .post("/api/solution/terminateEarly")
+            .headers(headers_http_authenticated)
+            .check(status.is(201))
+        )
+        .pause(1)
+        .exec(http("Get the jsonVehicleRoutingSolution")
+            .get("/api/solution")
+            .headers(headers_http_authenticated)
+            .check(status.is(200))
+        )
 
     val users = scenario("Users").exec(scn)
 
