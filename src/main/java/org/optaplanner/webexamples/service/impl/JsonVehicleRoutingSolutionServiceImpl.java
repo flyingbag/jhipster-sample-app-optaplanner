@@ -94,18 +94,27 @@ public class JsonVehicleRoutingSolutionServiceImpl implements JsonVehicleRouting
         jsonVehicleRoutingSolutionRepository.delete(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonVehicleRoutingSolution getSolution() {
         VehicleRoutingSolution solution = solverManager.retrieveOrCreateSolution("dummy");
         return convertToJsonVehicleRoutingSolution(solution);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonMessage solve() {
         boolean success = solverManager.solve("dummy");
         return new JsonMessage().text(success ? "Solving started." : "Solver was already running.");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonMessage terminateEarly() {
         boolean success = solverManager.terminateEarly("dummy");
